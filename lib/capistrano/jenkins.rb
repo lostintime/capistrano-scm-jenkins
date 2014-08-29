@@ -145,6 +145,7 @@ class Capistrano::Jenkins < Capistrano::SCM
         # is an archive - unpack and deploy
         context.execute :rm, "-rf \"out/\""
         context.execute :unzip, "\"#{downloaded_artifact}\" -d out/"
+	context.execute :rm, "-rf \"#{release_path}\""
         context.execute :mv, "out/#{fetch(:jenkins_artifact_path, "*")} \"#{release_path}\""
         context.execute :rm, "-rf \"out/\""
       else
